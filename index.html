@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana-Fit-75 💪</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8dfd5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #5a4a3a;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fefcfa;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(90, 74, 58, 0.08);
+            overflow: hidden;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c9b8a8 0%, #a89080 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: #fefcfa;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .header .countdown {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: #faf8f6;
+            border-bottom: 1px solid #e8dfd5;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            color: #a89080;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .tab-btn.active {
+            color: #5a4a3a;
+            background: #fefcfa;
+            border-bottom: 2px solid #8b735f;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-section {
+            background: linear-gradient(135deg, #c9b8a8 0%, #a89080 100%);
+            color: #fefcfa;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .weight-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .weight-display .current {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .weight-display .target {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 8px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar-container {
+            background: rgba(254, 252, 250, 0.2);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #fefcfa;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: #5a4a3a;
+            font-weight: 500;
+            font-size: 11px;
+        }
+
+        .rewards-mini {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 11px;
+        }
+
+        .reward-milestone {
+            text-align: center;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .reward-milestone.unlocked {
+            opacity: 1;
+            font-weight: 500;
+        }
+
+        .section {
+            background: #faf8f6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(139, 115, 95, 0.08);
+        }
+
+        .section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #5a4a3a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            background: #fefcfa;
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .checkbox-item:hover {
+            transform: translateX(3px);
+            border-color: #c9b8a8;
+            box-shadow: 0 2px 8px rgba(90, 74, 58, 0.08);
+        }
+
+        .checkbox-item.checked {
+            background: #e8dfd5;
+            border-color: #8b735f;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #8b735f;
+        }
+
+        .checkbox-item span {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .water-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .water-glass {
+            aspect-ratio: 1;
+            background: #fefcfa;
+            border: 2px solid #e8dfd5;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .water-glass.filled {
+            background: linear-gradient(to top, #c9b8a8 0%, #a89080 100%);
+            border-color: #8b735f;
+            animation: fillWater 0.5s;
+        }
+
+        @keyframes fillWater {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: #fefcfa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .stat-card .number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 400;
+            color: #8b735f;
+        }
+
+        .stat-card .label {
+            font-size: 11px;
+            color: #a89080;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: #5a4a3a;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e8dfd5;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            background: #fefcfa;
+            color: #5a4a3a;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #8b735f;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #c9b8a8 0%, #a89080 100%);
+            color: #fefcfa;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 115, 95, 0.25);
+        }
+
+        .menu-day {
+            background: #fefcfa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .menu-day h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #8b735f;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .menu-day .meal {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #faf8f6;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .menu-day .meal strong {
+            color: #5a4a3a;
+            font-weight: 500;
+        }
+
+        .photo-upload {
+            margin-top: 15px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #faf8f6;
+            cursor: pointer;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-item .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(139, 115, 95, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+            transition: all 0.3s;
+        }
+
+        .photo-item:hover .delete-btn {
+            display: block;
+        }
+
+        .reward-card {
+            background: #faf8f6;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 18px;
+            border: 2px solid rgba(139, 115, 95, 0.15);
+            transition: all 0.3s;
+        }
+
+        .reward-card.unlocked {
+            border-color: #8b735f;
+            background: linear-gradient(135deg, #e8dfd5 0%, #d4cbc0 100%);
+        }
+
+        .reward-card.next {
+            border-color: #c9b8a8;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(139, 115, 95, 0.15);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+
+        .reward-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reward-header h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #5a4a3a;
+            font-weight: 500;
+        }
+
+        .reward-badge {
+            font-size: 32px;
+        }
+
+        .reward-ideas {
+            font-size: 12px;
+            color: #7a6a5a;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .streak-display {
+            text-align: center;
+            background: linear-gradient(135deg, #c9b8a8 0%, #a89080 100%);
+            color: #fefcfa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .streak-display .number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .streak-display .label {
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .schedule-item {
+            background: #fefcfa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .schedule-item .time {
+            font-weight: 500;
+            color: #8b735f;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            background: #fefcfa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            position: relative;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .calendar-day.success {
+            background: #8b735f;
+            color: #fefcfa;
+        }
+
+        .calendar-day.failed {
+            background: #d4cbc0;
+            color: #7a6a5a;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #c9b8a8;
+            box-shadow: 0 2px 8px rgba(139, 115, 95, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .photo-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #5a4a3a;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .progress-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .progress-photo-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #faf8f6;
+            border: 1px solid rgba(139, 115, 95, 0.1);
+        }
+
+        .progress-photo-item img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .progress-photo-info {
+            padding: 12px;
+            background: #fefcfa;
+            font-size: 12px;
+            color: #7a6a5a;
+            text-align: center;
+        }
+
+        .progress-photo-item .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(139, 115, 95, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+            transition: all 0.3s;
+        }
+
+        .progress-photo-item:hover .delete-btn {
+            display: block;
+        }
+
+        .reward-journal-entry {
+            background: #fefcfa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid rgba(139, 115, 95, 0.15);
+        }
+
+        .reward-journal-entry.filled {
+            background: linear-gradient(135deg, #e8dfd5 0%, #d4cbc0 100%);
+            border-color: #8b735f;
+        }
+
+        .journal-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #a89080;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .journal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e8dfd5;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fefcfa;
+            color: #5a4a3a;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .journal-input:focus {
+            outline: none;
+            border-color: #8b735f;
+        }
+
+        .journal-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e8dfd5;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fefcfa;
+            color: #5a4a3a;
+            min-height: 80px;
+            resize: vertical;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        .journal-textarea:focus {
+            outline: none;
+            border-color: #8b735f;
+        }
+
+        .journal-display {
+            margin-top: 10px;
+        }
+
+        .journal-display .gift-text {
+            font-size: 15px;
+            color: #5a4a3a;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .journal-display .feeling-text {
+            font-size: 13px;
+            color: #7a6a5a;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .journal-display .date-text {
+            font-size: 11px;
+            color: #a89080;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .journal-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #c9b8a8 0%, #a89080 100%);
+            color: #fefcfa;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .journal-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .edit-journal-btn {
+            background: #fefcfa;
+            color: #8b735f;
+            border: 1px solid #8b735f;
+            padding: 8px 15px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Ana-Fit-75</h1>
+            <div class="countdown" id="countdown"></div>
+        </div>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('today')">Aujourd'hui</button>
+            <button class="tab-btn" onclick="switchTab('progress')">Progression</button>
+            <button class="tab-btn" onclick="switchTab('rewards')">Cadeaux</button>
+            <button class="tab-btn" onclick="switchTab('menu')">Menu</button>
+        </div>
+
+        <!-- TAB: AUJOURD'HUI -->
+        <div id="tab-today" class="tab-content active">
+            <div class="streak-display">
+                <div class="number" id="streak">0</div>
+                <div class="label">jours de suite 🔥</div>
+            </div>
+
+            <div class="section">
+                <h3>💧 Hydratation (3L = 12 verres)</h3>
+                <div class="water-grid" id="waterGrid"></div>
+                <div style="text-align: center; margin-top: 15px; font-weight: 400; color: #8b735f; font-size: 13px; letter-spacing: 0.5px;">
+                    <span id="waterCount">0</span> / 12 verres
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🏋️ Workouts</h3>
+                <div class="checkbox-item" id="workout1">
+                    <input type="checkbox" onchange="toggleTask('workout1')">
+                    <span>Muscu Madfit (5h45-6h30) - 45min</span>
+                </div>
+                <div class="checkbox-item" id="workout2">
+                    <input type="checkbox" onchange="toggleTask('workout2')">
+                    <span>Marche du soir - 45min</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🍽️ Repas</h3>
+                <div class="checkbox-item" id="meal1">
+                    <input type="checkbox" onchange="toggleTask('meal1')">
+                    <span>Petit-déjeuner (7h30)</span>
+                </div>
+                <div class="checkbox-item" id="meal2">
+                    <input type="checkbox" onchange="toggleTask('meal2')">
+                    <span>Déjeuner (12h30)</span>
+                </div>
+                <div class="checkbox-item" id="meal3">
+                    <input type="checkbox" onchange="toggleTask('meal3')">
+                    <span>Collation (14h45)</span>
+                </div>
+                <div class="checkbox-item" id="meal4">
+                    <input type="checkbox" onchange="toggleTask('meal4')">
+                    <span>Dîner (20h50)</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📚 Autres</h3>
+                <div class="checkbox-item" id="prayer">
+                    <input type="checkbox" onchange="toggleTask('prayer')">
+                    <span>Prière (4h30-5h30)</span>
+                </div>
+                <div class="checkbox-item" id="reading">
+                    <input type="checkbox" onchange="toggleTask('reading')">
+                    <span>Lecture 10 pages</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📸 Photos de mes plats</h3>
+                <input type="file" accept="image/*" id="photoInput" style="display: none;" onchange="addPhoto()">
+                <button class="btn" onclick="document.getElementById('photoInput').click()">
+                    📷 Ajouter une photo de plat
+                </button>
+                <div class="photo-grid" id="photoGrid"></div>
+            </div>
+
+            <div class="section">
+                <h3>💫 Photos de ma progression</h3>
+                <input type="file" accept="image/*" id="progressPhotoInput" style="display: none;" onchange="addProgressPhoto()">
+                <button class="btn" onclick="document.getElementById('progressPhotoInput').click()">
+                    📸 Ajouter une photo de moi
+                </button>
+                <div class="progress-photo-grid" id="progressPhotoGrid"></div>
+            </div>
+
+            <button class="btn" onclick="completeDay()" style="margin-top: 20px;">
+                ✅ Valider ma journée
+            </button>
+        </div>
+
+        <!-- TAB: PROGRESSION -->
+        <div id="tab-progress" class="tab-content">
+            <div class="progress-section">
+                <div class="weight-display">
+                    <div class="current"><span id="currentWeight">98</span> kg</div>
+                    <div class="target">Objectif: 78 kg le 24 déc 2026</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">0%</div>
+                </div>
+                <div class="rewards-mini">
+                    <div class="reward-milestone" id="m1">
+                        <div>🥉</div>
+                        <div>93kg</div>
+                    </div>
+                    <div class="reward-milestone" id="m2">
+                        <div>🥈</div>
+                        <div>88kg</div>
+                    </div>
+                    <div class="reward-milestone" id="m3">
+                        <div>🥇</div>
+                        <div>83kg</div>
+                    </div>
+                    <div class="reward-milestone" id="m4">
+                        <div>🏆</div>
+                        <div>78kg</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚖️ Mettre à jour mon poids</h3>
+                <div class="input-group">
+                    <label>Poids actuel (kg)</label>
+                    <input type="number" id="weightInput" step="0.1" placeholder="Ex: 97.5">
+                </div>
+                <button class="btn" onclick="updateWeight()">💾 Enregistrer</button>
+            </div>
+
+            <div class="section">
+                <h3>📊 Statistiques</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number" id="totalLoss">0</div>
+                        <div class="label">kg perdus</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="daysLeft">276</div>
+                        <div class="label">jours restants</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="successRate">0%</div>
+                        <div class="label">taux réussite</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="totalDays">0</div>
+                        <div class="label">jours écoulés</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📅 Calendrier du mois</h3>
+                <div class="calendar-grid" id="calendar"></div>
+            </div>
+        </div>
+
+        <!-- TAB: RÉCOMPENSES -->
+        <div id="tab-rewards" class="tab-content">
+            <div class="section">
+                <h3>🎁 Paliers principaux</h3>
+                
+                <div class="reward-card" id="reward-93">
+                    <div class="reward-header">
+                        <h4>93 kg (-5kg)</h4>
+                        <div class="reward-badge">🥉</div>
+                    </div>
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 5px; font-size: 15px;">10 000 - 15 000 FCFA</div>
+                    <div class="reward-ideas">
+                        💡 Idées: Nouveau legging Zara • Bouteille infuseur • Écouteurs Bluetooth • Kit manucure • Huile de coco bio
+                    </div>
+                    <div class="reward-journal-entry" id="journal-93"></div>
+                </div>
+
+                <div class="reward-card" id="reward-88">
+                    <div class="reward-header">
+                        <h4>88 kg (-10kg)</h4>
+                        <div class="reward-badge">🥈</div>
+                    </div>
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 5px; font-size: 15px;">25 000 - 40 000 FCFA</div>
+                    <div class="reward-ideas">
+                        💡 Idées: Smartwatch Xiaomi • Baskets Nike/Adidas • Massage 1h au spa • Sac de sport stylé • Coiffure premium
+                    </div>
+                    <div class="reward-journal-entry" id="journal-88"></div>
+                </div>
+
+                <div class="reward-card" id="reward-83">
+                    <div class="reward-header">
+                        <h4>83 kg (-15kg)</h4>
+                        <div class="reward-badge">🥇</div>
+                    </div>
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 5px; font-size: 15px;">50 000 - 75 000 FCFA</div>
+                    <div class="reward-ideas">
+                        💡 Idées: Tenue sport complète • Weekend à Saly • Resto Le Lagon • Shooting photo • Abonnement salle 3 mois
+                    </div>
+                    <div class="reward-journal-entry" id="journal-83"></div>
+                </div>
+
+                <div class="reward-card" id="reward-78">
+                    <div class="reward-header">
+                        <h4>78 kg (-20kg) 🎯 OBJECTIF FINAL</h4>
+                        <div class="reward-badge">🏆</div>
+                    </div>
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 5px; font-size: 15px;">120 000 - 200 000 FCFA</div>
+                    <div class="reward-ideas">
+                        💡 Idées: Shopping day illimité • Voyage Casamance • Bijou or/argent • Shooting pro + makeup • Spa day complet
+                    </div>
+                    <div class="reward-journal-entry" id="journal-78"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🌟 Bonus mensuels (90% réussite)</h3>
+                <div style="background: #fefcfa; padding: 18px; border-radius: 12px; border: 1px solid rgba(139, 115, 95, 0.1);">
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 8px; font-size: 15px;">5 000 - 10 000 FCFA</div>
+                    <div style="font-size: 12px; color: #7a6a5a; line-height: 1.6;">
+                        💡 Manucure-pédicure • Ciné Pathé • Livre Fnac • Bougie parfumée • Masque Bioderma • Brownie Brioche Dorée
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚡ Bonus hebdo (Semaine parfaite 7/7)</h3>
+                <div style="background: #fefcfa; padding: 18px; border-radius: 12px; border: 1px solid rgba(139, 115, 95, 0.1);">
+                    <div style="font-weight: 500; color: #8b735f; margin-bottom: 8px; font-size: 15px;">0 - 3 000 FCFA</div>
+                    <div style="font-size: 12px; color: #7a6a5a; line-height: 1.6;">
+                        💡 Smoothie bowl • Bain moussant + musique • Appel vidéo longue • Pâtisserie saine • Série sans culpabilité
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: MENU -->
+        <div id="tab-menu" class="tab-content">
+            <div class="section">
+                <h3>📋 Menu de la semaine</h3>
+                <div id="menuContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données du menu de la semaine
+        const weekMenu = [
+            {
+                day: "JOUR 1",
+                meals: [
+                    { name: "Petit-déj", items: "2 œufs (100g) + pain complet (60g) + banane (120g) + eau 300ml" },
+                    { name: "Déjeuner", items: "riz (150g cuit) + poisson (200g) + légumes (200g) + huile (10g) + eau 500ml" },
+                    { name: "Collation", items: "pomme (150g) + amandes (20g) + eau 300ml" },
+                    { name: "Dîner", items: "poulet (200g) + légumes (200g) + patate douce (100g) + yaourt (125g) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 2",
+                meals: [
+                    { name: "Petit-déj", items: "smoothie (fruit 150g + avoine 30g + lait 200ml + beurre cacahuète 10g) + œuf (50g) + eau 300ml" },
+                    { name: "Déjeuner", items: "couscous (150g cuit) + poulet (200g) + légumes (200g) + avocat (50g) + eau 500ml" },
+                    { name: "Collation", items: "carottes (150g) + houmous (40g) + eau 300ml" },
+                    { name: "Dîner", items: "omelette (2 œufs 100g) + pain (40g) + salade (150g) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 3",
+                meals: [
+                    { name: "Petit-déj", items: "biscottes (40g) + beurre (10g) + confiture (10g) + yaourt (125g) + fruit (150g) + eau 300ml" },
+                    { name: "Déjeuner", items: "pâtes (150g cuites) + viande (150g) + salade (200g) + eau 500ml" },
+                    { name: "Collation", items: "fruit (150g) + noix (20g) + eau 300ml" },
+                    { name: "Dîner", items: "poisson (200g) + légumes (200g) + riz (80g cuit) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 4",
+                meals: [
+                    { name: "Petit-déj", items: "yaourt (125g) + céréales (40g) + fruit (150g) + eau 300ml" },
+                    { name: "Déjeuner", items: "riz (150g) + poulet (200g) + légumes (200g) + huile (10g) + eau 500ml" },
+                    { name: "Collation", items: "concombre (150g) + fromage (30g) + eau 300ml" },
+                    { name: "Dîner", items: "soupe (300ml) + poulet (150g) + pomme de terre (100g) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 5",
+                meals: [
+                    { name: "Petit-déj", items: "pain (60g) + fromage (30g) + dinde (40g) + fruit (150g) + eau 300ml" },
+                    { name: "Déjeuner", items: "quinoa (150g) + poisson (200g) + salade (200g) + avocat (50g) + eau 500ml" },
+                    { name: "Collation", items: "yaourt (125g) + fruit (150g) + eau 300ml" },
+                    { name: "Dîner", items: "viande (150g) + purée (100g) + salade (200g) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 6",
+                meals: [
+                    { name: "Petit-déj", items: "pancakes avoine (60g avoine) + beurre cacahuète (10g) + fruit (150g) + eau 300ml" },
+                    { name: "Déjeuner", items: "riz (150g) + poisson (200g) + légumes (200g) + eau 500ml" },
+                    { name: "Collation", items: "fruit (150g) + amandes (20g) + eau 300ml" },
+                    { name: "Dîner", items: "poulet (200g) + légumes (200g) + pâtes (80g cuites) + eau 400ml" }
+                ]
+            },
+            {
+                day: "JOUR 7",
+                meals: [
+                    { name: "Petit-déj", items: "lait (200ml) + céréales (40g) + fruit (150g) + eau 300ml" },
+                    { name: "Déjeuner", items: "patate douce (150g) + poulet (200g) + légumes (200g) + huile (10g) + eau 500ml" },
+                    { name: "Collation", items: "popcorn (20g) + fruit (150g) + eau 300ml" },
+                    { name: "Dîner", items: "salade (200g) + œuf (50g) + avocat (50g) + pain (40g) + eau 400ml" }
+                ]
+            }
+        ];
+
+        // Initialisation du localStorage
+        if (!localStorage.getItem('anafit-data')) {
+            const initialData = {
+                startDate: '2026-03-23',
+                targetDate: '2026-12-24',
+                currentWeight: 98,
+                targetWeight: 78,
+                dailyData: {},
+                photos: [],
+                progressPhotos: [],
+                rewardJournals: {
+                    '93': null,
+                    '88': null,
+                    '83': null,
+                    '78': null
+                },
+                weightHistory: [{ date: '2026-03-23', weight: 98 }]
+            };
+            localStorage.setItem('anafit-data', JSON.stringify(initialData));
+        }
+
+        let data = JSON.parse(localStorage.getItem('anafit-data'));
+        
+        // Migration pour les anciennes versions
+        if (!data.progressPhotos) data.progressPhotos = [];
+        if (!data.rewardJournals) data.rewardJournals = { '93': null, '88': null, '83': null, '78': null };
+
+        // Fonctions utilitaires
+        function saveData() {
+            localStorage.setItem('anafit-data', JSON.stringify(data));
+            updateUI();
+        }
+
+        function getTodayKey() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function getTodayData() {
+            const key = getTodayKey();
+            if (!data.dailyData[key]) {
+                data.dailyData[key] = {
+                    water: 0,
+                    tasks: {},
+                    completed: false
+                };
+            }
+            return data.dailyData[key];
+        }
+
+        // Initialisation UI
+        function initWaterGrid() {
+            const grid = document.getElementById('waterGrid');
+            grid.innerHTML = '';
+            const today = getTodayData();
+            
+            for (let i = 0; i < 12; i++) {
+                const glass = document.createElement('div');
+                glass.className = 'water-glass' + (i < today.water ? ' filled' : '');
+                glass.innerHTML = i < today.water ? '💧' : '';
+                glass.onclick = () => toggleWater(i);
+                grid.appendChild(glass);
+            }
+            
+            document.getElementById('waterCount').textContent = today.water;
+        }
+
+        function toggleWater(index) {
+            const today = getTodayData();
+            if (index < today.water) {
+                today.water = index;
+            } else {
+                today.water = index + 1;
+            }
+            saveData();
+            initWaterGrid();
+        }
+
+        function toggleTask(taskId) {
+            const today = getTodayData();
+            const checkbox = document.querySelector(`#${taskId} input`);
+            today.tasks[taskId] = checkbox.checked;
+            
+            if (checkbox.checked) {
+                document.getElementById(taskId).classList.add('checked');
+            } else {
+                document.getElementById(taskId).classList.remove('checked');
+            }
+            
+            saveData();
+        }
+
+        function addPhoto() {
+            const input = document.getElementById('photoInput');
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    data.photos.push({
+                        date: getTodayKey(),
+                        data: e.target.result
+                    });
+                    saveData();
+                    displayPhotos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayPhotos() {
+            const grid = document.getElementById('photoGrid');
+            const today = getTodayKey();
+            const todayPhotos = data.photos.filter(p => p.date === today);
+            
+            grid.innerHTML = '';
+            todayPhotos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.innerHTML = `
+                    <img src="${photo.data}" alt="Plat">
+                    <button class="delete-btn" onclick="deletePhoto(${index})">×</button>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function deletePhoto(index) {
+            const today = getTodayKey();
+            const todayPhotos = data.photos.filter(p => p.date === today);
+            const photoToDelete = todayPhotos[index];
+            const globalIndex = data.photos.indexOf(photoToDelete);
+            data.photos.splice(globalIndex, 1);
+            saveData();
+            displayPhotos();
+        }
+
+        function addProgressPhoto() {
+            const input = document.getElementById('progressPhotoInput');
+            const file = input.files[0];
+            
+            if (file) {
+                const weight = prompt('Quel était ton poids ce jour-là ? (kg)');
+                const note = prompt('Note optionnelle (ex: "Photo avant", "1 mois", etc.)');
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    data.progressPhotos.push({
+                        date: getTodayKey(),
+                        weight: weight || data.currentWeight,
+                        note: note || '',
+                        data: e.target.result
+                    });
+                    saveData();
+                    displayProgressPhotos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayProgressPhotos() {
+            const grid = document.getElementById('progressPhotoGrid');
+            grid.innerHTML = '';
+            
+            // Trier par date (plus récentes en premier)
+            const sortedPhotos = [...data.progressPhotos].reverse();
+            
+            sortedPhotos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'progress-photo-item';
+                const realIndex = data.progressPhotos.length - 1 - index;
+                item.innerHTML = `
+                    <img src="${photo.data}" alt="Progression">
+                    <div class="progress-photo-info">
+                        <div style="font-weight: 500; color: #5a4a3a;">${photo.weight} kg</div>
+                        ${photo.note ? `<div style="margin-top: 4px;">${photo.note}</div>` : ''}
+                        <div style="margin-top: 4px; font-size: 11px; color: #a89080;">${formatDate(photo.date)}</div>
+                    </div>
+                    <button class="delete-btn" onclick="deleteProgressPhoto(${realIndex})">×</button>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function deleteProgressPhoto(index) {
+            if (confirm('Supprimer cette photo ?')) {
+                data.progressPhotos.splice(index, 1);
+                saveData();
+                displayProgressPhotos();
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        }
+
+        function completeDay() {
+            const today = getTodayData();
+            const allTasks = ['workout1', 'workout2', 'meal1', 'meal2', 'meal3', 'meal4', 'prayer', 'reading'];
+            const completedTasks = allTasks.filter(t => today.tasks[t]).length;
+            const waterComplete = today.water >= 12;
+            
+            if (completedTasks === allTasks.length && waterComplete) {
+                today.completed = true;
+                saveData();
+                alert('🎉 Bravo Anaïs ! Journée parfaite validée ! Continue comme ça ! 💪');
+            } else {
+                const missing = [];
+                if (!waterComplete) missing.push('eau (12 verres)');
+                allTasks.forEach(t => {
+                    if (!today.tasks[t]) missing.push(t.replace('workout', 'workout ').replace('meal', 'repas ').replace('prayer', 'prière').replace('reading', 'lecture'));
+                });
+                alert('⚠️ Il te manque : ' + missing.join(', '));
+            }
+        }
+
+        function updateWeight() {
+            const newWeight = parseFloat(document.getElementById('weightInput').value);
+            if (newWeight && newWeight > 0) {
+                data.currentWeight = newWeight;
+                data.weightHistory.push({
+                    date: getTodayKey(),
+                    weight: newWeight
+                });
+                saveData();
+                alert('✅ Poids enregistré : ' + newWeight + ' kg');
+                document.getElementById('weightInput').value = '';
+            }
+        }
+
+        function updateUI() {
+            // Poids actuel
+            document.getElementById('currentWeight').textContent = data.currentWeight;
+            
+            // Progression
+            const totalLoss = 98 - data.currentWeight;
+            const progress = (totalLoss / 20) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = Math.round(progress) + '%';
+            document.getElementById('totalLoss').textContent = totalLoss.toFixed(1);
+            
+            // Milestones
+            ['93', '88', '83', '78'].forEach((weight, i) => {
+                const element = document.getElementById('m' + (i + 1));
+                if (data.currentWeight <= parseInt(weight)) {
+                    element.classList.add('unlocked');
+                }
+            });
+            
+            // Récompenses et journaux
+            const rewardWeights = [93, 88, 83, 78];
+            rewardWeights.forEach(w => {
+                const card = document.getElementById('reward-' + w);
+                if (data.currentWeight <= w) {
+                    card.classList.add('unlocked');
+                    card.classList.remove('next');
+                }
+                
+                // Afficher le journal de récompense
+                displayRewardJournal(w);
+            });
+            
+            // Prochaine récompense
+            const nextReward = rewardWeights.find(w => data.currentWeight > w);
+            if (nextReward) {
+                document.getElementById('reward-' + nextReward).classList.add('next');
+            }
+            
+            // Streak
+            let streak = 0;
+            let currentDate = new Date();
+            while (true) {
+                const key = currentDate.toISOString().split('T')[0];
+                if (data.dailyData[key] && data.dailyData[key].completed) {
+                    streak++;
+                    currentDate.setDate(currentDate.getDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            document.getElementById('streak').textContent = streak;
+            
+            // Stats
+            const startDate = new Date(data.startDate);
+            const today = new Date();
+            const targetDate = new Date(data.targetDate);
+            const totalDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+            const daysLeft = Math.floor((targetDate - today) / (1000 * 60 * 60 * 24));
+            
+            const completedDays = Object.values(data.dailyData).filter(d => d.completed).length;
+            const successRate = totalDays > 0 ? Math.round((completedDays / totalDays) * 100) : 0;
+            
+            document.getElementById('totalDays').textContent = totalDays;
+            document.getElementById('daysLeft').textContent = daysLeft;
+            document.getElementById('successRate').textContent = successRate + '%';
+            
+            // Countdown
+            const months = Math.floor(daysLeft / 30);
+            const days = daysLeft % 30;
+            document.getElementById('countdown').textContent = 
+                `Objectif dans ${months} mois et ${days} jours (24 déc 2026) 🎯`;
+            
+            // Calendrier
+            generateCalendar();
+            
+            // Restaurer état du jour
+            const todayData = getTodayData();
+            Object.keys(todayData.tasks).forEach(taskId => {
+                const checkbox = document.querySelector(`#${taskId} input`);
+                if (checkbox) {
+                    checkbox.checked = todayData.tasks[taskId];
+                    if (todayData.tasks[taskId]) {
+                        document.getElementById(taskId).classList.add('checked');
+                    }
+                }
+            });
+        }
+
+        function displayRewardJournal(weight) {
+            const journalDiv = document.getElementById('journal-' + weight);
+            const journal = data.rewardJournals[weight];
+            
+            if (journal) {
+                // Afficher le journal rempli
+                journalDiv.classList.add('filled');
+                journalDiv.innerHTML = `
+                    <div class="journal-display">
+                        <div class="gift-text">🎁 ${journal.gift}</div>
+                        <div class="feeling-text">"${journal.feeling}"</div>
+                        <div class="date-text">${formatDate(journal.date)}</div>
+                    </div>
+                    <button class="journal-btn edit-journal-btn" onclick="editRewardJournal('${weight}')">
+                        ✏️ Modifier
+                    </button>
+                `;
+            } else if (data.currentWeight <= weight) {
+                // Formulaire pour remplir le journal
+                journalDiv.innerHTML = `
+                    <div class="journal-label">🎉 Tu as atteint ce palier ! Note ton cadeau :</div>
+                    <input type="text" class="journal-input" id="gift-${weight}" placeholder="Ce que je me suis offert...">
+                    <div class="journal-label">💭 Comment tu t'es sentie ?</div>
+                    <textarea class="journal-textarea" id="feeling-${weight}" placeholder="Mes émotions, ma fierté, ce moment..."></textarea>
+                    <button class="journal-btn" onclick="saveRewardJournal('${weight}')">
+                        💾 Enregistrer ce moment
+                    </button>
+                `;
+            } else {
+                journalDiv.innerHTML = '<div style="text-align: center; color: #a89080; font-size: 13px; padding: 15px;">🔒 Débloquer en atteignant ce palier</div>';
+            }
+        }
+
+        function saveRewardJournal(weight) {
+            const gift = document.getElementById('gift-' + weight).value.trim();
+            const feeling = document.getElementById('feeling-' + weight).value.trim();
+            
+            if (!gift) {
+                alert('⚠️ Note au moins ce que tu t\'es offert !');
+                return;
+            }
+            
+            data.rewardJournals[weight] = {
+                gift: gift,
+                feeling: feeling || 'Un moment incroyable ! 💫',
+                date: getTodayKey()
+            };
+            
+            saveData();
+            alert('🎉 Ton moment est enregistré pour toujours !');
+        }
+
+        function editRewardJournal(weight) {
+            const journal = data.rewardJournals[weight];
+            const journalDiv = document.getElementById('journal-' + weight);
+            
+            journalDiv.innerHTML = `
+                <div class="journal-label">🎁 Ce que je me suis offert :</div>
+                <input type="text" class="journal-input" id="gift-${weight}" value="${journal.gift}">
+                <div class="journal-label">💭 Comment je me suis sentie :</div>
+                <textarea class="journal-textarea" id="feeling-${weight}">${journal.feeling}</textarea>
+                <button class="journal-btn" onclick="saveRewardJournal('${weight}')">
+                    💾 Sauvegarder
+                </button>
+            `;
+        }
+
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+                
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                
+                if (data.dailyData[dateKey]) {
+                    if (data.dailyData[dateKey].completed) {
+                        day.classList.add('success');
+                    } else {
+                        day.classList.add('failed');
+                    }
+                }
+                
+                if (i === now.getDate()) {
+                    day.classList.add('today');
+                }
+                
+                calendar.appendChild(day);
+            }
+        }
+
+        function loadMenu() {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = '';
+            
+            weekMenu.forEach(day => {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'menu-day';
+                
+                let html = `<h4>${day.day}</h4>`;
+                day.meals.forEach(meal => {
+                    html += `<div class="meal"><strong>${meal.name}:</strong> ${meal.items}</div>`;
+                });
+                
+                dayDiv.innerHTML = html;
+                container.appendChild(dayDiv);
+            });
+        }
+
+        function switchTab(tabName) {
+            // Cacher tous les tabs
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Afficher le tab sélectionné
+            document.getElementById('tab-' + tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Initialisation au chargement
+        window.onload = function() {
+            initWaterGrid();
+            displayPhotos();
+            displayProgressPhotos();
+            loadMenu();
+            updateUI();
+        };
+    </script>
+</body>
+</html>
